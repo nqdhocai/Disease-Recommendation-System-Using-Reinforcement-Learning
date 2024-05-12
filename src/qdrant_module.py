@@ -8,8 +8,8 @@ MODEL = "fine-tuned/medical-20-0-16-jinaai_jina-embeddings-v2-small-en-100-gpt-3
 tokenizer = AutoTokenizer.from_pretrained(MODEL)
 model = AutoModel.from_pretrained(MODEL)
 
-CLIENT_URL = "https://446586bd-03f0-49ee-9db0-4bcedcaa4d2a.us-east4-0.gcp.cloud.qdrant.io:6333"
-API_KEY = "r3vOEY_WAvvQI1884H_JOi5iTWm0SiIvVF3MK0ilnT8EqOhHu61aUA"
+CLIENT_URL = "YOUR_CLIENT_URL"
+API_KEY = "YOUR_API_KEY"
 
 class QDRANT:
     def __init__(self, CLIENT_URL=CLIENT_URL, API_KEY=API_KEY):
