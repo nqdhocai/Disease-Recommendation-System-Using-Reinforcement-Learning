@@ -1,0 +1,3 @@
+transformers
+qdrant_client
+torch
