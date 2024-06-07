@@ -2,14 +2,17 @@ from transformers import AutoModel, AutoTokenizer
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from build_kg import KnowledgeGraph
+import ast
 import torch
 
 MODEL = "fine-tuned/medical-20-0-16-jinaai_jina-embeddings-v2-small-en-100-gpt-3.5-turbo-0_9062874564"
 tokenizer = AutoTokenizer.from_pretrained(MODEL)
 model = AutoModel.from_pretrained(MODEL)
 
-CLIENT_URL = "YOUR_CLIENT_URL"
-API_KEY = "YOUR_API_KEY"
+with open('./API_key.txt') as f:
+    API = ast.literal_eval(f.read())
+    CLIENT_URL = API['CLIENT_URL']
+    API_KEY = API['API_KEY']
 
 class QDRANT:
     def __init__(self, CLIENT_URL=CLIENT_URL, API_KEY=API_KEY):
@@ -53,3 +56,8 @@ class QDRANT:
         search_result = self.client.search(
             collection_name="entity", query_vector=query_vec, limit=limit
         )
+        return search_result
+
+if __name__ == '__main__':
+    qdrant = QDRANT()
+    qdrant.set_up_db()

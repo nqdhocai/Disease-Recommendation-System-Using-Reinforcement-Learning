@@ -23,11 +23,18 @@ pip install -r requirements.txt
 
 ## Usage
 
+### First time run
+1. Get your API CLIENT URL and API KEY then put it on API_key.txt
+2. Build the Vector Databas - QDRANT:
+    ```python
+    python src/qdrant_module.py
+    ```
+
 ### Training the Reinforcement Learning Agent
 
 1. Train the reinforcement learning agent on the processed data:
 
-    ```bash
+    ```python
     python src/train_agent.py
     ```
 ## Results
