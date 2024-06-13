@@ -10,9 +10,9 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL)
 model = AutoModel.from_pretrained(MODEL)
 
 with open('./API_key.txt') as f:
-    API = ast.literal_eval(f.read())
-    CLIENT_URL = API['CLIENT_URL']
-    API_KEY = API['API_KEY']
+    API = f.read().split('\n')
+    CLIENT_URL = API[0]
+    API_KEY = API[1]
 
 class QDRANT:
     def __init__(self, CLIENT_URL=CLIENT_URL, API_KEY=API_KEY):
@@ -37,11 +37,10 @@ class QDRANT:
         )
         points = []
         for id, entity in id2entity:
-            entity_type = kg.id2type[id]
             point_struct = PointStruct(
                 id=int(id),
                 vector=self.word2vec(entity).tolist()[0],
-                payload={"entity": entity, "type": entity_type}
+                payload={"entity": entity}
             )
             points.append(point_struct)
         operation_info = self.client.upsert(
